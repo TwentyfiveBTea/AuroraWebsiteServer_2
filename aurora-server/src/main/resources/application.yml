@@ -4,3 +4,13 @@ server:
 spring:
   profiles:
     active: dev
+aurora:
+  jwt:
+    user-secret-key: itcast
+    # 24h
+    user-ttl: 86400000
+    user-token-name: token
+    admin-secret-key: itcast
+    # 2h
+    admin-ttl: 7200000
+    admin-token-name: token
