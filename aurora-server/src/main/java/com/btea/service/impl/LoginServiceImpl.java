@@ -1,7 +1,9 @@
 package com.btea.service.impl;
 
 import com.btea.constant.MessageConstant;
+import com.btea.dto.AdminLoginDTO;
 import com.btea.dto.UserLoginDTO;
+import com.btea.entity.Admin;
 import com.btea.entity.User;
 import com.btea.exception.AccountNotFoundException;
 import com.btea.exception.PasswordErrorException;
@@ -28,12 +30,11 @@ public class LoginServiceImpl implements LoginService {
      * @param userLoginDTO
      */
     @Override
-    public User login(UserLoginDTO userLoginDTO) {
+    public User userLogin(UserLoginDTO userLoginDTO) {
         String userId = userLoginDTO.getUserId();
         String password = userLoginDTO.getPassword();
 
         User user = loginMapper.getByUserId(userId);
-
         if (user == null) {
             // 如果查询的成员不存在
             throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
@@ -47,5 +48,32 @@ public class LoginServiceImpl implements LoginService {
         }
 
         return user;
+    }
+
+    /**
+     * 管理员登录
+     *
+     * @param adminLoginDTO
+     * @return
+     */
+    @Override
+    public Admin adminLogin(AdminLoginDTO adminLoginDTO) {
+        String userName = adminLoginDTO.getUserName();
+        String password = adminLoginDTO.getPassword();
+
+        Admin admin = loginMapper.getByUserName(userName);
+        if (admin == null) {
+            // 如果查询的用户不存在
+            throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
+        }
+
+        // 比较密码是否正确
+        password = DigestUtils.md5DigestAsHex(password.getBytes());
+        if (!password.equals(admin.getPassword())) {
+            // 密码错误
+            throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
+        }
+
+        return admin;
     }
 }

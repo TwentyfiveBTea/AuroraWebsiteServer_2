@@ -1,6 +1,8 @@
 package com.btea.service;
 
+import com.btea.dto.AdminLoginDTO;
 import com.btea.dto.UserLoginDTO;
+import com.btea.entity.Admin;
 import com.btea.entity.User;
 
 /**
@@ -14,5 +16,13 @@ public interface LoginService {
      *
      * @param userLoginDTO
      */
-    User login(UserLoginDTO userLoginDTO);
+    User userLogin(UserLoginDTO userLoginDTO);
+
+    /**
+     * 管理员登录
+     *
+     * @param adminLoginDTO
+     * @return
+     */
+    Admin adminLogin(AdminLoginDTO adminLoginDTO);
 }

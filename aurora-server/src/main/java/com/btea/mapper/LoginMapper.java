@@ -1,6 +1,7 @@
 package com.btea.mapper;
 
 import com.btea.dto.UserLoginDTO;
+import com.btea.entity.Admin;
 import com.btea.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,4 +19,12 @@ public interface LoginMapper {
      * @param userId
      */
     User getByUserId(String userId);
+
+    /**
+     * 根据 userName查询管理员
+     *
+     * @param userName
+     * @return
+     */
+    Admin getByUserName(String userName);
 }

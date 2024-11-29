@@ -2,12 +2,15 @@ package com.btea.controller;
 
 import com.btea.constant.JwtClaimsConstant;
 import com.btea.constant.MessageConstant;
+import com.btea.dto.AdminLoginDTO;
 import com.btea.dto.UserLoginDTO;
+import com.btea.entity.Admin;
 import com.btea.entity.User;
 import com.btea.properties.JwtProperties;
 import com.btea.result.R;
 import com.btea.service.LoginService;
 import com.btea.utils.JwtUtil;
+import com.btea.vo.AdminLoginVO;
 import com.btea.vo.UserLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,10 +40,10 @@ public class LoginController {
     private JwtProperties jwtProperties;
 
     @RequestMapping(method = RequestMethod.POST, path = "/user")
-    @ApiOperation("成员登录接口")
-    public R<UserLoginVO> login(@RequestBody UserLoginDTO userLoginDTO) {
+    @ApiOperation("成员登录")
+    public R<UserLoginVO> userLogin(@RequestBody UserLoginDTO userLoginDTO) {
         log.info("登录: {}", userLoginDTO);
-        User user = loginService.login(userLoginDTO);
+        User user = loginService.userLogin(userLoginDTO);
 
         // 登录成功，生成 jwt令牌
         Map<String, Object> claims = new HashMap<>();
@@ -57,5 +60,15 @@ public class LoginController {
     }
 
     // TODO 管理员登录接口
+    @RequestMapping(method = RequestMethod.POST, path = "/admin")
+    @ApiOperation("管理员登录")
+    public R<AdminLoginVO> adminLogin(@RequestBody AdminLoginDTO adminLoginDTO) {
+        log.info("登录: {}", adminLoginDTO);
+        Admin admin = loginService.adminLogin(adminLoginDTO);
+
+        // 登录成功，生成 jwt令牌
+        // TODO 同上，写生成 jwt令牌的业务代码
+
+    }
 
 }
