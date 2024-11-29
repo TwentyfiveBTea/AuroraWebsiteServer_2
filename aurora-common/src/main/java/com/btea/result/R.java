@@ -46,10 +46,10 @@ public class R<T> implements Serializable {
         return result;
     }
 
-//    public static <T> R<T> error(String msg) {
-//        R result = new R();
-//        result.msg = msg;
-//        result.code = 0;
-//        return result;
-//    }
+    public static <T> R<T> error(Integer code, String msg) {
+        R result = new R();
+        result.code = code;
+        result.msg = msg;
+        return result;
+    }
 }
