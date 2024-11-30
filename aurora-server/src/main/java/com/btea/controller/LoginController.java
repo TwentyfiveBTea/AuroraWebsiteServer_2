@@ -66,7 +66,6 @@ public class LoginController {
         Admin admin = loginService.adminLogin(adminLoginDTO);
 
         // 登录成功，生成 jwt令牌
-        // TODO 同上，写生成 jwt令牌的业务代码
         HashMap<String, Object> claims = new HashMap<>();
         claims.put(JwtClaimsConstant.ADMIN_ID, admin.getUserName());
         String token = JwtUtil.createJWT(jwtProperties.getAdminTokenName(), jwtProperties.getAdminTtl(), claims);
