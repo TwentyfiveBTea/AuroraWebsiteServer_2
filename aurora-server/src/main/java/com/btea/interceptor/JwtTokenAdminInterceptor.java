@@ -1,6 +1,7 @@
 package com.btea.interceptor;
 
 import com.btea.constant.JwtClaimsConstant;
+import com.btea.constant.StatusCodeConstant;
 import com.btea.context.BaseContext;
 import com.btea.properties.JwtProperties;
 import com.btea.utils.JwtUtil;
@@ -55,7 +56,7 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
             return true;
         } catch (Exception ex) {
             //4、不通过，响应401状态码
-            response.setStatus(401);
+            response.setStatus(StatusCodeConstant.UNAUTHORIZED);
             return false;
         }
     }
