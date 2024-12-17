@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.btea.mapper.JoinMapper">
+    <insert id="insertUser" parameterType="com.btea.entity.Join">
+        insert into `join`(name, gender, grade, phone, email, majors, orientation, introduce, create_time)
+        values (#{name}, #{gender}, #{grade}, #{phone}, #{email}, #{majors}, #{orientation}, #{introduce},
+                #{create_time})
+    </insert>
+
+    <update id="updateJoinStatus" parameterType="String">
+        update path_status
+        set status = #{status}
+        where path = 'join'
+    </update>
+
+    <select id="selectJoinStatus" resultType="String">
+        select status
+        from path_status
+        where path = 'join'
+    </select>
+
+</mapper>
