@@ -8,7 +8,7 @@ import com.btea.entity.User;
 /**
  * @Author: TwentyFiveBTea
  * @Date: 2024/11/28 21:03
- * @Description: 登录服务层
+ * @Description: 登录服务层接口
  */
 public interface LoginService {
     /**

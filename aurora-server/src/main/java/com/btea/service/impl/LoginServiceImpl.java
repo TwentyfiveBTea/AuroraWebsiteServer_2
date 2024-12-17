@@ -16,7 +16,7 @@ import org.springframework.util.DigestUtils;
 /**
  * @Author: TwentyFiveBTea
  * @Date: 2024/11/28 21:04
- * @Description: 登录服务层接口
+ * @Description: 登录服务层接口实现类
  */
 @Service
 public class LoginServiceImpl implements LoginService {

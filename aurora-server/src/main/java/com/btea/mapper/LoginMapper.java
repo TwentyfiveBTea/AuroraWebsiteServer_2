@@ -1,6 +1,5 @@
 package com.btea.mapper;
 
-import com.btea.dto.UserLoginDTO;
 import com.btea.entity.Admin;
 import com.btea.entity.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -8,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * @Author: TwentyFiveBTea
  * @Date: 2024/11/28 21:15
- * @Description: 登录据访问层
+ * @Description: 登录访问层
  */
 @Mapper
 public interface LoginMapper {
