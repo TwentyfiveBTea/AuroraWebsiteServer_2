@@ -15,4 +15,6 @@ public class MessageConstant {
     public static final String URL_FORMAT_ERROR = "URL格式错误";
     public static final String INSUFFICIENT_PERMISSIONS = "权限不足";
     public static final String LOGIN_SUCCESSFUL = "登录成功";
+    public static final String SERVER_ERROR = "服务器错误";
+    public static final String INFORMATION_SUBMITTED_SUCCESSFULLY = "信息提交成功";
 }
