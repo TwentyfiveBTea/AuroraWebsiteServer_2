@@ -6,6 +6,7 @@ import com.btea.entity.Join;
 import com.btea.mapper.JoinMapper;
 import com.btea.result.PageResult;
 import com.btea.service.JoinService;
+import com.btea.vo.JoinVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,9 +63,16 @@ public class JoinServiceImpl implements JoinService {
         return joinMapper.selectJoinStatus();
     }
 
+    /**
+     * 分页查询报名信息
+     * @param registrationInformationDTO
+     * @return
+     */
     @Override
     public PageResult pageQuery(RegistrationInformationDTO registrationInformationDTO) {
         PageHelper.startPage(registrationInformationDTO.getPage(),registrationInformationDTO.getPageSize());
+        Page<JoinVO> page = joinMapper.pageQuery(registrationInformationDTO);
+        return new PageResult(page.getTotal(), page.getResult());
     }
 
 }

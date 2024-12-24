@@ -20,4 +20,7 @@
         where path = 'join'
     </select>
 
+    <select id="pageQuery" resultType="com.btea.vo.JoinVO">
+        select name, gender, grade, phone, email, majors, orientation, introduce from `join`
+    </select>
 </mapper>

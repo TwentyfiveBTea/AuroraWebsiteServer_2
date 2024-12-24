@@ -66,8 +66,8 @@ public class JoinController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/admin/join/manage")
-    public R<PageResult<JoinVO>> RegistrationInformation(RegistrationInformationDTO registrationInformationDTO) {
-        // TODO 继续完成如下分页查询逻辑
-
+    public R<PageResult> registrationInformation(RegistrationInformationDTO registrationInformationDTO) {
+        PageResult pageResult = joinService.pageQuery(registrationInformationDTO);
+        return R.success(pageResult);
     }
 }

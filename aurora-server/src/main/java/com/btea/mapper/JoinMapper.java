@@ -1,8 +1,11 @@
 package com.btea.mapper;
 
 import com.btea.annotation.AutoFill;
+import com.btea.dto.RegistrationInformationDTO;
 import com.btea.entity.Join;
 import com.btea.enumeration.OperationType;
+import com.btea.vo.JoinVO;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -34,4 +37,11 @@ public interface JoinMapper {
      * @return
      */
     String selectJoinStatus();
+
+    /**
+     * 分页查询报名信息
+     * @param registrationInformationDTO
+     * @return
+     */
+    Page<JoinVO> pageQuery(RegistrationInformationDTO registrationInformationDTO);
 }
