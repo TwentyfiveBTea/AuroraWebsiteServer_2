@@ -2,6 +2,8 @@ package com.btea.service;
 
 
 import com.btea.dto.JoinDTO;
+import com.btea.dto.RegistrationInformationDTO;
+import com.btea.result.PageResult;
 
 /**
  * @Author: TwentyFiveBTea
@@ -32,5 +34,10 @@ public interface JoinService {
      */
     String updateJoinStatus(String status);
 
-
+    /**
+     * 分页查询报名信息
+     * @param registrationInformationDTO
+     * @return
+     */
+    PageResult pageQuery(RegistrationInformationDTO registrationInformationDTO);
 }

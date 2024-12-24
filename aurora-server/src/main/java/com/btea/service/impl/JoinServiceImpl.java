@@ -1,12 +1,16 @@
 package com.btea.service.impl;
 
 import com.btea.dto.JoinDTO;
+import com.btea.dto.RegistrationInformationDTO;
 import com.btea.entity.Join;
 import com.btea.mapper.JoinMapper;
+import com.btea.result.PageResult;
 import com.btea.service.JoinService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 
 /**
  * @Author: TwentyFiveBTea
@@ -56,6 +60,11 @@ public class JoinServiceImpl implements JoinService {
     public String updateJoinStatus(String status) {
         joinMapper.updateJoinStatus(status);
         return joinMapper.selectJoinStatus();
+    }
+
+    @Override
+    public PageResult pageQuery(RegistrationInformationDTO registrationInformationDTO) {
+        PageHelper.startPage(registrationInformationDTO.getPage(),registrationInformationDTO.getPageSize());
     }
 
 }
