@@ -23,9 +23,30 @@ public interface KeyMapper {
     int insertKey(Key key);
 
     /**
-     * 查询持有钥匙数量以及信息
+     * 查询持有钥匙以及信息
      * @param userDTO
      * @return
      */
-    Key selectselectKeyByUserId(UserDTO userDTO);
+    Key selectKeyByUserId(UserDTO userDTO);
+
+    /**
+     * 查找未被租赁的钥匙
+     * @return
+     */
+    String selecNotLeasedKey();
+
+    /**
+     * 更新钥匙租赁状态
+     * @param key
+     * @return
+     */
+    @AutoFill(OperationType.UPDATE)
+    int updateKeyStatusLease(Key key);
+
+    /**
+     * 更新钥匙归还状态
+     * @return
+     */
+    @AutoFill(OperationType.UPDATE)
+    int updateKeyStatusReturn(Key key);
 }

@@ -12,16 +12,34 @@ import com.btea.vo.MemberKeyVO;
 public interface KeyService {
     /**
      * 设置钥匙数量
+     *
      * @param keysNumber
      * @return
      */
     int insertKey(int keysNumber);
 
     /**
-     * 查询持有钥匙数量以及信息
+     * 查询持有钥匙以及信息
+     *
      * @param userDTO
      * @return
      */
     MemberKeyVO selectKeyByUserId(UserDTO userDTO);
 
+    /**
+     * 查找未被租赁的钥匙
+     *
+     * @return
+     */
+    String selectNotLeasedKey();
+
+    /**
+     * 更新钥匙租赁状态
+     *
+     * @param id
+     * @return
+     */
+    int updateKeyStatusLease(String id, int leasedStatus, String name, String userId);
+
+    int updateKeyStatusReturn(String id, int leasedStatus);
 }

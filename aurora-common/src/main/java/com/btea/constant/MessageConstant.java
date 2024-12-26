@@ -20,4 +20,9 @@ public class MessageConstant {
     public static final String UPDATE_STATUS_FAILED = "更新状态失败";
     public static final String UPDATE_STATUS_SUCCESSFULLY = "更新状态成功";
     public static final String UPDATE_SUCCESSFULLY = "更新成功";
+    public static final String NO_REMAINING_KEYS = "无剩余钥匙，无法租赁";
+    public static final String LEASE_SUCCESSFUL = "租赁成功";
+    public static final String RETURN_SUCCESSFUL = "归还成功";
+    public static final String LEASED_KEYS = "已租赁钥匙，无法租赁";
+    public static final String UNLEASED_KEYS = "未租赁钥匙，无法归还";
 }

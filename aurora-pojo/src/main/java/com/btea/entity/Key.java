@@ -22,7 +22,7 @@ public class Key implements Serializable {
     private String id;
 
     // 租赁状态
-    private String leasedStatus;
+    private Integer leasedStatus;
 
     // 租赁人姓名
     private String name;
