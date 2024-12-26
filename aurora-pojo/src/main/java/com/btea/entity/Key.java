@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Builder
 public class Key implements Serializable {
     // 钥匙 id
-    private Integer id;
+    private String id;
 
     // 租赁状态
     private String leasedStatus;

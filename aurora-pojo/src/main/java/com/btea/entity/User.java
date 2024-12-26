@@ -33,4 +33,7 @@ public class User implements Serializable {
     // 密码
     private String password;
 
+    // 刷题提交状态
+    private Integer submitStatus;
+
 }
