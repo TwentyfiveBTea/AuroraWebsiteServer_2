@@ -3,7 +3,7 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/aurorawensite?useSSL=true&userUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/aurorawebsite?useSSL=true&userUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: root
     password: Long050720
 
@@ -12,3 +12,12 @@ mybatis:
   type-aliases-package: com.btea.entity
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com:
+      sky:
+        mapper: debug
+        service: info
+        controller: info

@@ -4,13 +4,17 @@ server:
 spring:
   profiles:
     active: dev
+  main:
+    allow-circular-references: true
+
 aurora:
   jwt:
-    user-secret-key: itcast
-    # 24h
-    user-ttl: 86400000
-    user-token-name: token
-    admin-secret-key: itcast
+    user-secret-key: userIdCast
     # 2h
-    admin-ttl: 7200000
+    user-ttl: 7200000
+    user-token-name: usertoken
+
+    admin-secret-key: adminIdCast
+    # 12h
+    admin-ttl: 43200000
     admin-token-name: token

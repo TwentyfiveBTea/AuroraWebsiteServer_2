@@ -67,8 +67,9 @@ public class LoginController {
 
         // 登录成功，生成 jwt令牌
         HashMap<String, Object> claims = new HashMap<>();
-        claims.put(JwtClaimsConstant.ADMIN_ID, admin.getUserName());
-        String token = JwtUtil.createJWT(jwtProperties.getAdminTokenName(), jwtProperties.getAdminTtl(), claims);
+        claims.put(JwtClaimsConstant.ADMIN_ID, admin.getId());
+        String token = JwtUtil.createJWT(jwtProperties.getAdminSecretKey(), jwtProperties.getAdminTtl(), claims);
+        log.info(jwtProperties.getAdminTokenName());
 
         AdminLoginVO adminLoginVO = AdminLoginVO.builder()
                 .userName(admin.getUserName())

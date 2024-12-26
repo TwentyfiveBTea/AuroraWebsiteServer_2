@@ -2,7 +2,6 @@ package com.btea.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
@@ -15,7 +14,7 @@ import java.io.Serializable;
 @Data
 public class JoinDTO implements Serializable {
     // 姓名
-    @NotBlank(message = "学号不能为空")
+    @NotBlank(message = "名字不能为空")
     private String name;
 
     // 性别
@@ -28,7 +27,7 @@ public class JoinDTO implements Serializable {
 
     // 电话
     @NotBlank(message = "电话不能为空")
-    @Pattern(regexp = "^1[3|4|5|7|8][0-9]{9}$", message = "手机号格式错误")
+    @Pattern(regexp = "^1[3-9]\\d{9}$", message = "手机号格式错误")
     private String phone;
 
     // 邮箱

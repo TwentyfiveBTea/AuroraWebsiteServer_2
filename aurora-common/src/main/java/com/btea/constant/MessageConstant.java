@@ -18,4 +18,5 @@ public class MessageConstant {
     public static final String SERVER_ERROR = "服务器错误";
     public static final String INFORMATION_SUBMITTED_SUCCESSFULLY = "信息提交成功";
     public static final String UPDATE_STATUS_FAILED = "更新状态失败";
+    public static final String UPDATE_STATUS_SUCCESSFULLY = "更新状态成功";
 }

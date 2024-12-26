@@ -32,7 +32,7 @@ public interface JoinService {
      * @param status
      * @return
      */
-    String updateJoinStatus(String status);
+    void updateJoinStatus(String status);
 
     /**
      * 分页查询报名信息

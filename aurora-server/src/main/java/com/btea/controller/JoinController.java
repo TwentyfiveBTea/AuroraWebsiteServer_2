@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
@@ -31,7 +32,7 @@ public class JoinController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/join")
     @ApiOperation("提交个人信息")
-    public R join(@RequestBody JoinDTO joinDTO) {
+    public R join(@RequestBody @Validated JoinDTO joinDTO) {
         int status = joinService.insertUser(joinDTO);
         // 如果状态值为 0， 插入失败
         if (status == 0) {
@@ -56,13 +57,14 @@ public class JoinController {
     @RequestMapping(method = RequestMethod.PUT, path = "/admin/join/state/manage")
     @ApiOperation("更改报名页面开放状态")
     public R JoinStatus(@RequestParam String status) {
-        String newStatus = joinService.updateJoinStatus(status);
-        if (Objects.equals(newStatus, status)) {
+        String oldStatus = joinService.selectJoinStatus();
+        joinService.updateJoinStatus(status);
+        if (Objects.equals(oldStatus, status)) {
             // 如果前后状态一致 -- 更新失败
             return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.UPDATE_STATUS_FAILED);
         }
 
-        return R.success(newStatus);
+        return R.success(joinService.selectJoinStatus(), MessageConstant.UPDATE_STATUS_SUCCESSFULLY);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/admin/join/manage")

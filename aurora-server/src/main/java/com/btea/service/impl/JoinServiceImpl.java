@@ -58,19 +58,19 @@ public class JoinServiceImpl implements JoinService {
      * @return
      */
     @Override
-    public String updateJoinStatus(String status) {
+    public void updateJoinStatus(String status) {
         joinMapper.updateJoinStatus(status);
-        return joinMapper.selectJoinStatus();
     }
 
     /**
      * 分页查询报名信息
+     *
      * @param registrationInformationDTO
      * @return
      */
     @Override
     public PageResult pageQuery(RegistrationInformationDTO registrationInformationDTO) {
-        PageHelper.startPage(registrationInformationDTO.getPage(),registrationInformationDTO.getPageSize());
+        PageHelper.startPage(registrationInformationDTO.getPage(), registrationInformationDTO.getPageSize());
         Page<JoinVO> page = joinMapper.pageQuery(registrationInformationDTO);
         return new PageResult(page.getTotal(), page.getResult());
     }
