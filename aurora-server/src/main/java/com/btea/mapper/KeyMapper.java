@@ -49,4 +49,16 @@ public interface KeyMapper {
      */
     @AutoFill(OperationType.UPDATE)
     int updateKeyStatusReturn(Key key);
+
+    /**
+     * 查询所有钥匙数量
+     * @return
+     */
+    int selectAllKeys();
+
+    /**
+     * 查询被租赁钥匙数量
+     * @return
+     */
+    int selectIsLeasedKeys();
 }

@@ -41,5 +41,23 @@ public interface KeyService {
      */
     int updateKeyStatusLease(String id, int leasedStatus, String name, String userId);
 
+    /**
+     * 更新钥匙归还状态
+     * @param id
+     * @param leasedStatus
+     * @return
+     */
     int updateKeyStatusReturn(String id, int leasedStatus);
+
+    /**
+     * 查询所有钥匙数量
+     * @return
+     */
+    int selectAllKeys();
+
+    /**
+     * 查询被租赁钥匙数量
+     * @return
+     */
+    int selectIsLeasedKeys();
 }

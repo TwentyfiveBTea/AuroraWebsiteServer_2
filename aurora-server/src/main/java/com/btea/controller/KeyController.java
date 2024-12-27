@@ -5,14 +5,13 @@ import com.btea.constant.StatusCodeConstant;
 import com.btea.dto.UserDTO;
 import com.btea.result.R;
 import com.btea.service.KeyService;
+import com.btea.vo.KeyVO;
 import com.btea.vo.MemberKeyVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Random;
 
 /**
  * @Author: TwentyFiveBTea
@@ -39,13 +38,13 @@ public class KeyController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, path = "/key/rent")
+    @RequestMapping(method = RequestMethod.GET, path = "/tools/key/rent")
     @ApiOperation("查询持有钥匙")
     public R heldKeysNumber(@RequestBody UserDTO userDTO) {
         return R.success(keyService.selectKeyByUserId(userDTO));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/key/rent")
+    @RequestMapping(method = RequestMethod.PUT, path = "/tools/key/rent")
     @ApiOperation("租赁归还钥匙")
     public R leaseReturnKey(@RequestParam int leasedStatus, @RequestParam String name, @RequestParam String userId) {
         UserDTO userDTO = new UserDTO();
@@ -91,6 +90,16 @@ public class KeyController {
 
         return R.success(MessageConstant.RETURN_SUCCESSFUL);
 
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/tools/key")
+    @ApiOperation("查询剩余钥匙")
+    public R keysNumber() {
+        return R.success(new KeyVO().builder()
+                .keyNumber(keyService.selectAllKeys())
+                .isLeased(keyService.selectIsLeasedKeys())
+                .notLeased(keyService.selectAllKeys() - keyService.selectIsLeasedKeys())
+                .build());
     }
 
 }

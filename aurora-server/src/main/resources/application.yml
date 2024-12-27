@@ -12,7 +12,7 @@ aurora:
     user-secret-key: userIdCast
     # 2h
     user-ttl: 7200000
-    user-token-name: usertoken
+    user-token-name: token
 
     admin-secret-key: adminIdCast
     # 12h

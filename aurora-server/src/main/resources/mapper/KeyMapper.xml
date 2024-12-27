@@ -38,4 +38,15 @@
             update_time   = #{updateTime}
         where id = #{id}
     </update>
+
+    <select id="selectAllKeys" resultType="int">
+        select count(*) as allKeysNumber
+        from `key`
+    </select>
+
+    <select id="selectIsLeasedKeys" resultType="int">
+        select count(*) as isLeasedKeysNumber
+        from `key`
+        where user_id is not null
+    </select>
 </mapper>

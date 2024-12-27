@@ -46,6 +46,7 @@ public class LoginController {
         User user = loginService.userLogin(userLoginDTO);
 
         // 登录成功，生成 jwt令牌
+        // TODO  修改bug token
         Map<String, Object> claims = new HashMap<>();
         claims.put(JwtClaimsConstant.USER_ID, user.getUserId());
         String token = JwtUtil.createJWT(jwtProperties.getUserTokenName(), jwtProperties.getUserTtl(), claims);

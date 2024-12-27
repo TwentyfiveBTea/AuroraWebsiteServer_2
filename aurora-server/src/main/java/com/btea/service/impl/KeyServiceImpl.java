@@ -88,6 +88,12 @@ public class KeyServiceImpl implements KeyService {
         return keyMapper.updateKeyStatusLease(key);
     }
 
+    /**
+     * 更新钥匙归还状态
+     * @param id
+     * @param leasedStatus
+     * @return
+     */
     @Override
     public int updateKeyStatusReturn(String id, int leasedStatus) {
         Key key = new Key().builder()
@@ -95,5 +101,23 @@ public class KeyServiceImpl implements KeyService {
                 .leasedStatus(leasedStatus)
                 .build();
         return keyMapper.updateKeyStatusReturn(key);
+    }
+
+    /**
+     * 查询所有钥匙数量
+     * @return
+     */
+    @Override
+    public int selectAllKeys() {
+        return keyMapper.selectAllKeys();
+    }
+
+    /**
+     * 查询被租赁钥匙数量
+     * @return
+     */
+    @Override
+    public int selectIsLeasedKeys() {
+        return keyMapper.selectIsLeasedKeys();
     }
 }
