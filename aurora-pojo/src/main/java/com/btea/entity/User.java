@@ -18,6 +18,9 @@ import java.io.Serializable;
 @Builder
 public class User implements Serializable {
 
+    // id
+    private Long id;
+
     // 学号
     private String userId;
 

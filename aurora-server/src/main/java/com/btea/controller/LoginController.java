@@ -46,10 +46,9 @@ public class LoginController {
         User user = loginService.userLogin(userLoginDTO);
 
         // 登录成功，生成 jwt令牌
-        // TODO  修改bug token
-        Map<String, Object> claims = new HashMap<>();
-        claims.put(JwtClaimsConstant.USER_ID, user.getUserId());
-        String token = JwtUtil.createJWT(jwtProperties.getUserTokenName(), jwtProperties.getUserTtl(), claims);
+        HashMap<String, Object> claims = new HashMap<>();
+        claims.put(JwtClaimsConstant.USER_ID, user.getId());
+        String token = JwtUtil.createJWT(jwtProperties.getUserSecretKey(), jwtProperties.getUserTtl(), claims);
 
         UserLoginVO userLoginVO = UserLoginVO.builder()
                 .userId(user.getUserId())
@@ -70,7 +69,6 @@ public class LoginController {
         HashMap<String, Object> claims = new HashMap<>();
         claims.put(JwtClaimsConstant.ADMIN_ID, admin.getId());
         String token = JwtUtil.createJWT(jwtProperties.getAdminSecretKey(), jwtProperties.getAdminTtl(), claims);
-        log.info(jwtProperties.getAdminTokenName());
 
         AdminLoginVO adminLoginVO = AdminLoginVO.builder()
                 .userName(admin.getUserName())
