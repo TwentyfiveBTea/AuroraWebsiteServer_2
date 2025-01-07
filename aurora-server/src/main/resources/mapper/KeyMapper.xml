@@ -49,4 +49,10 @@
         from `key`
         where user_id is not null
     </select>
+
+    <select id="selectKeysStatus" resultType="com.btea.entity.Key">
+        select id, name, user_id, update_time
+        from `key`
+        where leased_status = '-1'
+    </select>
 </mapper>

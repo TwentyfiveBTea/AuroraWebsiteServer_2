@@ -5,10 +5,13 @@ import com.btea.dto.UserDTO;
 import com.btea.entity.Key;
 import com.btea.mapper.KeyMapper;
 import com.btea.service.KeyService;
+import com.btea.vo.KeysLeaseStatusVO;
 import com.btea.vo.MemberKeyVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 /**
@@ -90,6 +93,7 @@ public class KeyServiceImpl implements KeyService {
 
     /**
      * 更新钥匙归还状态
+     *
      * @param id
      * @param leasedStatus
      * @return
@@ -105,6 +109,7 @@ public class KeyServiceImpl implements KeyService {
 
     /**
      * 查询所有钥匙数量
+     *
      * @return
      */
     @Override
@@ -114,10 +119,36 @@ public class KeyServiceImpl implements KeyService {
 
     /**
      * 查询被租赁钥匙数量
+     *
      * @return
      */
     @Override
     public int selectIsLeasedKeys() {
         return keyMapper.selectIsLeasedKeys();
     }
+
+    /**
+     * 查询钥匙租赁情况
+     *
+     * @return
+     */
+    @Override
+    public KeysLeaseStatusVO selectKeysStatus() {
+        Key key = keyMapper.selectKeysStatus();
+        LocalDateTime updateTime = key.getUpdateTime();
+
+        // 获取当前时间
+        LocalDateTime now = LocalDateTime.now();
+        // 计算两个时间的差值
+        String leasedDays = String.valueOf(ChronoUnit.DAYS.between(updateTime, now));
+
+        return new KeysLeaseStatusVO().builder()
+                .id(key.getId())
+                .name(key.getName())
+                .leasedTime(String.valueOf(key.getUpdateTime()))
+                .leasedDays(leasedDays)
+                .build();
+    }
+
+
 }

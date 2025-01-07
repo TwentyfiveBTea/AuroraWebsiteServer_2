@@ -25,4 +25,5 @@ public class MessageConstant {
     public static final String RETURN_SUCCESSFUL = "归还成功";
     public static final String LEASED_KEYS = "已租赁钥匙，无法租赁";
     public static final String UNLEASED_KEYS = "未租赁钥匙，无法归还";
+    public static final String QUERY_SUCCESS = "查询成功";
 }

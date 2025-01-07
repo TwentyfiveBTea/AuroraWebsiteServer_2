@@ -16,6 +16,7 @@ public interface KeyMapper {
 
     /**
      * 设置钥匙数量
+     *
      * @param key
      * @return
      */
@@ -24,6 +25,7 @@ public interface KeyMapper {
 
     /**
      * 查询持有钥匙以及信息
+     *
      * @param userDTO
      * @return
      */
@@ -31,12 +33,14 @@ public interface KeyMapper {
 
     /**
      * 查找未被租赁的钥匙
+     *
      * @return
      */
     String selecNotLeasedKey();
 
     /**
      * 更新钥匙租赁状态
+     *
      * @param key
      * @return
      */
@@ -45,6 +49,7 @@ public interface KeyMapper {
 
     /**
      * 更新钥匙归还状态
+     *
      * @return
      */
     @AutoFill(OperationType.UPDATE)
@@ -52,13 +57,22 @@ public interface KeyMapper {
 
     /**
      * 查询所有钥匙数量
+     *
      * @return
      */
     int selectAllKeys();
 
     /**
      * 查询被租赁钥匙数量
+     *
      * @return
      */
     int selectIsLeasedKeys();
+
+    /**
+     * 查询钥匙租赁情况
+     *
+     * @return
+     */
+    Key selectKeysStatus();
 }

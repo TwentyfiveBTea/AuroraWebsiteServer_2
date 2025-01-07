@@ -102,4 +102,9 @@ public class KeyController {
                 .build());
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/admin/key/manage")
+    @ApiOperation("查询钥匙租赁情况")
+    public R keysLeaseStatus() {
+        return R.success(MessageConstant.QUERY_SUCCESS, keyService.selectKeysStatus());
+    }
 }

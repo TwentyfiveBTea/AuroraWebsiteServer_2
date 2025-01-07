@@ -1,7 +1,7 @@
 package com.btea.service;
 
 import com.btea.dto.UserDTO;
-import com.btea.entity.Key;
+import com.btea.vo.KeysLeaseStatusVO;
 import com.btea.vo.MemberKeyVO;
 
 /**
@@ -43,6 +43,7 @@ public interface KeyService {
 
     /**
      * 更新钥匙归还状态
+     *
      * @param id
      * @param leasedStatus
      * @return
@@ -51,13 +52,24 @@ public interface KeyService {
 
     /**
      * 查询所有钥匙数量
+     *
      * @return
      */
     int selectAllKeys();
 
     /**
      * 查询被租赁钥匙数量
+     *
      * @return
      */
     int selectIsLeasedKeys();
+
+    /**
+     * 查询钥匙租赁情况
+     *
+     * @return
+     */
+    KeysLeaseStatusVO selectKeysStatus();
+
+
 }
