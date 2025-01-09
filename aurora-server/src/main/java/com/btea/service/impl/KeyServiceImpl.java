@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @Author: TwentyFiveBTea
@@ -133,21 +136,26 @@ public class KeyServiceImpl implements KeyService {
      * @return
      */
     @Override
-    public KeysLeaseStatusVO selectKeysStatus() {
-        Key key = keyMapper.selectKeysStatus();
-        LocalDateTime updateTime = key.getUpdateTime();
-
+    public List<KeysLeaseStatusVO> selectKeysStatus() {
+        List<Key> keys = keyMapper.selectKeysStatus();
         // 获取当前时间
         LocalDateTime now = LocalDateTime.now();
-        // 计算两个时间的差值
-        String leasedDays = String.valueOf(ChronoUnit.DAYS.between(updateTime, now));
 
-        return new KeysLeaseStatusVO().builder()
-                .id(key.getId())
-                .name(key.getName())
-                .leasedTime(String.valueOf(key.getUpdateTime()))
-                .leasedDays(leasedDays)
-                .build();
+        List<KeysLeaseStatusVO> keysLeaseStatusVOS = keys.stream()
+                .map(key -> {
+                    LocalDateTime updateTime = key.getUpdateTime();
+                    // 计算两个时间的差值
+                    String leasedDays = String.valueOf(ChronoUnit.DAYS.between(updateTime, now));
+                    return new KeysLeaseStatusVO().builder()
+                            .id(key.getId())
+                            .name(key.getName())
+                            .leasedTime(String.valueOf(key.getUpdateTime()))
+                            .leasedDays(leasedDays)
+                            .build();
+                })
+                .collect(Collectors.toList());
+
+        return keysLeaseStatusVOS;
     }
 
 

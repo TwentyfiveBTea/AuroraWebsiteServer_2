@@ -6,6 +6,8 @@ import com.btea.entity.Key;
 import com.btea.enumeration.OperationType;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @Author: TwentyFiveBTea
  * @Date: 2024/12/26 10:26
@@ -74,5 +76,5 @@ public interface KeyMapper {
      *
      * @return
      */
-    Key selectKeysStatus();
+    List<Key> selectKeysStatus();
 }

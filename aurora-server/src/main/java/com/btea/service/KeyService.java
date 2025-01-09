@@ -4,6 +4,8 @@ import com.btea.dto.UserDTO;
 import com.btea.vo.KeysLeaseStatusVO;
 import com.btea.vo.MemberKeyVO;
 
+import java.util.List;
+
 /**
  * @Author: TwentyFiveBTea
  * @Date: 2024/12/26 10:15
@@ -69,7 +71,7 @@ public interface KeyService {
      *
      * @return
      */
-    KeysLeaseStatusVO selectKeysStatus();
+    List<KeysLeaseStatusVO> selectKeysStatus();
 
 
 }
