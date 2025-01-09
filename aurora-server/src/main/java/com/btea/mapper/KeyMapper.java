@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * @Author: TwentyFiveBTea
  * @Date: 2024/12/26 10:26
- * @Description:
+ * @Description: 钥匙访问层
  */
 @Mapper
 public interface KeyMapper {

@@ -8,4 +8,5 @@ package com.btea.constant;
 public class ApplyStatusConstant {
     public static final Integer AGREE = 1;
     public static final Integer DISAGREE = -1;
+    public static final Integer ORIGINAL = 0;
 }

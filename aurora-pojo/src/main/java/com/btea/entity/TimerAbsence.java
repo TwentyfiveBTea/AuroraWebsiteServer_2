@@ -19,10 +19,13 @@ import java.time.LocalDateTime;
 @Builder
 public class TimerAbsence implements Serializable {
     // 请假 id
-    private Integer id;
+    private String id;
 
     // 学号
     private String userId;
+
+    // 姓名
+    private String name;
 
     // 请假时间
     private String timerAbsenceTime;
@@ -31,7 +34,7 @@ public class TimerAbsence implements Serializable {
     private String timerAbsenceReason;
 
     // 请假状态
-    private String timerAbsenceStatus;
+    private Integer timerAbsenceStatus;
 
     // 创建时间
     private LocalDateTime createTime;

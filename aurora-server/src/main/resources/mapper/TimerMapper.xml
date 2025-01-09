@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.btea.mapper.TimerMapper">
+    <insert id="insertAbsence" parameterType="com.btea.entity.TimerAbsence">
+        insert into timer_absence(id, user_id, name, timer_absence_time, timer_absence_reason, timer_absence_status,
+                                  create_time)
+        VALUES (#{id}, #{userId}, #{name}, #{timerAbsenceTime}, #{timerAbsenceReason}, #{timerAbsenceStatus},
+                #{createTime})
+    </insert>
+
+    <update id="updateTimerAbsenceStatus">
+        update timer_absence
+        set timer_absence_status = #{timerAbsenceStatus}
+        where id = #{timerAbsenceId}
+    </update>
+
+    <select id="selectLeaseStatusByUserId" resultType="com.btea.entity.TimerAbsence">
+        select *
+        from timer_absence
+        where user_id = #{userId}
+    </select>
+
+    <select id="pageQuery" resultType="com.btea.vo.TimerAbsenceManagerVO">
+        select id, name, timer_absence_time, timer_absence_reason, timer_absence_status from timer_absence
+        <where>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
