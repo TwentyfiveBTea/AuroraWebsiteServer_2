@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -50,11 +51,11 @@ public class TimerController {
     @RequestMapping(method = RequestMethod.GET, path = "/tools/timer/myAbsence")
     @ApiOperation("查询个人请假")
     public R selectLeaveStatus(@RequestParam String userId) {
-        TimerAbsenceVO timerAbsenceVO = timerService.selectLeaveStatusByUserId(userId);
-        if (Objects.equals(timerAbsenceVO.getId(), "")) {
+        List<TimerAbsenceVO> timerAbsenceVOS = timerService.selectLeaveStatusByUserId(userId);
+        if (timerAbsenceVOS.isEmpty()) {
             return R.success(MessageConstant.QUERY_SUCCESS);
         }
-        return R.success(MessageConstant.QUERY_SUCCESS, timerAbsenceVO);
+        return R.success(MessageConstant.QUERY_SUCCESS, timerAbsenceVOS);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/admin/timer/absence/manage")

@@ -15,7 +15,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @Author: TwentyFiveBTea
@@ -66,22 +69,21 @@ public class TimerServiceImpl implements TimerService {
      * @return
      */
     @Override
-    public TimerAbsenceVO selectLeaveStatusByUserId(String userId) {
-        TimerAbsence timerAbsence = timerMapper.selectLeaseStatusByUserId(userId);
-        if (timerAbsence == null) {
-            return new TimerAbsenceVO().builder()
-                    .id("")
-                    .timerAbsenceTime("")
-                    .timerAbsenceReason("")
-                    .timerAbsenceStatus(0)
-                    .build();
+    public List<TimerAbsenceVO> selectLeaveStatusByUserId(String userId) {
+        List<TimerAbsence> timerAbsences = timerMapper.selectLeaseStatusByUserId(userId);
+        if (timerAbsences == null || timerAbsences.isEmpty()) {
+            return Collections.emptyList();
         }
-        return new TimerAbsenceVO().builder()
-                .id(timerAbsence.getId())
-                .timerAbsenceTime(timerAbsence.getTimerAbsenceTime())
-                .timerAbsenceReason(timerAbsence.getTimerAbsenceReason())
-                .timerAbsenceStatus(timerAbsence.getTimerAbsenceStatus())
-                .build();
+        List<TimerAbsenceVO> timerAbsenceVOS = timerAbsences.stream()
+                .map(timerAbsence -> new TimerAbsenceVO().builder()
+                        .id(timerAbsence.getId())
+                        .timerAbsenceTime(timerAbsence.getTimerAbsenceTime())
+                        .timerAbsenceReason(timerAbsence.getTimerAbsenceReason())
+                        .timerAbsenceStatus(timerAbsence.getTimerAbsenceStatus())
+                        .build())
+                .collect(Collectors.toList());
+
+        return timerAbsenceVOS;
     }
 
     /**

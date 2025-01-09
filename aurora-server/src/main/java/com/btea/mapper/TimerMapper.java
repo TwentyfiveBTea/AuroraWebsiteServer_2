@@ -9,6 +9,8 @@ import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @Author: TwentyFiveBTea
  * @Date: 2025/01/07 16:36
@@ -40,7 +42,7 @@ public interface TimerMapper {
      * @param userId
      * @return
      */
-    TimerAbsence selectLeaseStatusByUserId(String userId);
+    List<TimerAbsence> selectLeaseStatusByUserId(String userId);
 
     /**
      * 分页查询打卡请假

@@ -7,6 +7,8 @@ import com.btea.vo.TimerAbsenceVO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * @Author: TwentyFiveBTea
  * @Date: 2025/01/07 16:35
@@ -36,7 +38,7 @@ public interface TimerService {
      * @param userId
      * @return
      */
-    TimerAbsenceVO selectLeaveStatusByUserId(String userId);
+    List<TimerAbsenceVO> selectLeaveStatusByUserId(String userId);
 
     /**
      * 分页查询打卡请假
