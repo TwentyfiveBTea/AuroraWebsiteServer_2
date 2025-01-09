@@ -68,6 +68,7 @@ public class JoinController {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/admin/join/manage")
+    @ApiOperation("分页查看报名信息")
     public R<PageResult> registrationInformation(RegistrationInformationDTO registrationInformationDTO) {
         PageResult pageResult = joinService.pageQuery(registrationInformationDTO);
         return R.success(pageResult);
