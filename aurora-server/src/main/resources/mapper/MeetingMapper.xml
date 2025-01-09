@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.btea.mapper.MeetingMapper">
+    <insert id="insertAbsence" parameterType="com.btea.entity.MeetingAbsence">
+        insert into meeting_absence(id, user_id, name, meeting_absence_time, meeting_absence_reason,
+                                    meeting_absence_status, create_time)
+        VALUES (#{id}, #{userId}, #{name}, #{meetingAbsenceTime}, #{meetingAbsenceReason}, #{meetingAbsenceStatus},
+                #{createTime})
+    </insert>
+
+    <update id="updateMeetingAbsenceStatus">
+        update meeting_absence
+        set meeting_absence_status = #{meetingAbsenceStatus}
+        where id = #{meetingAbsenceId}
+    </update>
+
+    <select id="selectLeaseStatusByUserId" resultType="com.btea.entity.MeetingAbsence">
+        select *
+        from meeting_absence
+        where user_id = #{userId}
+    </select>
+
+    <select id="pageQuery" resultType="com.btea.vo.MeetingAbsenceVO">
+        select id,name, meeting_absence_time, meeting_absence_reason, meeting_absence_status from meeting_absence
+        <where>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+</mapper>
