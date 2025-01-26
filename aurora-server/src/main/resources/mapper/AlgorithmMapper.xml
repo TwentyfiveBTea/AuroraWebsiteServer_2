@@ -20,4 +20,15 @@
             update_time   = #{updateTime}
         where user_id = #{userId}
     </update>
+
+    <select id="pageQuery" resultType="com.btea.vo.AlgorithVO">
+        select title_url, create_time
+        from algorithm
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectAlgorithmCount" resultType="com.btea.vo.AlgorithCountVO">
+        select name, user_id, submit_count, update_time
+        from user
+    </select>
 </mapper>

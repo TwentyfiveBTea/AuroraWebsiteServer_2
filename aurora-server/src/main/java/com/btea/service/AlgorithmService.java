@@ -1,6 +1,11 @@
 package com.btea.service;
 
+import com.btea.dto.AlgorithmDTO;
 import com.btea.entity.User;
+import com.btea.result.PageResult;
+import com.btea.vo.AlgorithCountVO;
+
+import java.util.List;
 
 /**
  * @Author: TwentyFiveBTea
@@ -31,4 +36,19 @@ public interface AlgorithmService {
      * @param user
      */
     void updateSubmitCount(User user);
+
+    /**
+     * 分页查询刷题记录
+     *
+     * @param algorithmDTO
+     * @return
+     */
+    PageResult pageQuery(AlgorithmDTO algorithmDTO);
+
+    /**
+     * 查询成员刷题数量
+     *
+     * @return
+     */
+    List<AlgorithCountVO> selectAlgorithmCount();
 }

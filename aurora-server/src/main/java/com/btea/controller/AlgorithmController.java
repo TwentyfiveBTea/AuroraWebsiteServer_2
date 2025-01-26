@@ -2,16 +2,18 @@ package com.btea.controller;
 
 import com.btea.constant.MessageConstant;
 import com.btea.constant.StatusCodeConstant;
+import com.btea.dto.AlgorithmDTO;
+import com.btea.result.PageResult;
 import com.btea.result.R;
 import com.btea.service.AlgorithmService;
+import com.btea.vo.AlgorithCountVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author: TwentyFiveBTea
@@ -43,4 +45,22 @@ public class AlgorithmController {
                 return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.SERVER_ERROR);
         }
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/tools/algorithm")
+    @ApiOperation("分页查询刷题记录")
+    public R<PageResult> selectAlgorithm(AlgorithmDTO algorithmDTO) {
+        PageResult pageResult = algorithmService.pageQuery(algorithmDTO);
+        return R.success(pageResult);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/admin/algorithm/count")
+    @ApiOperation("查询成员刷题数量")
+    public R selectAlgorithmCount() {
+        List<AlgorithCountVO> algorithCountVOS = algorithmService.selectAlgorithmCount();
+        if (algorithCountVOS.isEmpty()) {
+            return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.SERVER_ERROR);
+        }
+        return R.success(MessageConstant.QUERY_SUCCESS, algorithCountVOS);
+    }
+
 }

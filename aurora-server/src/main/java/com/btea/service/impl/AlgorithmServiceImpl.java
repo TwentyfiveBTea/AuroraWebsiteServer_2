@@ -1,15 +1,22 @@
 package com.btea.service.impl;
 
+import com.btea.dto.AlgorithmDTO;
 import com.btea.entity.Algorithm;
 import com.btea.entity.User;
 import com.btea.mapper.AlgorithmMapper;
+import com.btea.result.PageResult;
 import com.btea.service.AlgorithmService;
+import com.btea.vo.AlgorithCountVO;
+import com.btea.vo.AlgorithVO;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -106,4 +113,28 @@ public class AlgorithmServiceImpl implements AlgorithmService {
     public void updateSubmitCount(User user) {
         algorithmMapper.updateSubmitCount(user);
     }
+
+    /**
+     * 分页查询刷题记录
+     *
+     * @param algorithmDTO
+     * @return
+     */
+    @Override
+    public PageResult pageQuery(AlgorithmDTO algorithmDTO) {
+        PageHelper.startPage(algorithmDTO.getPage(), algorithmDTO.getPageSize());
+        Page<AlgorithVO> page = algorithmMapper.pageQuery(algorithmDTO);
+        return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    /**
+     * 查询成员刷题数量
+     *
+     * @return
+     */
+    @Override
+    public List<AlgorithCountVO> selectAlgorithmCount() {
+        return algorithmMapper.selectAlgorithmCount();
+    }
+
 }

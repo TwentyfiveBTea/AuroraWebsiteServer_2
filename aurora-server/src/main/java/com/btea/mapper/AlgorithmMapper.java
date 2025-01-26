@@ -1,10 +1,16 @@
 package com.btea.mapper;
 
 import com.btea.annotation.AutoFill;
+import com.btea.dto.AlgorithmDTO;
 import com.btea.entity.Algorithm;
 import com.btea.entity.User;
 import com.btea.enumeration.OperationType;
+import com.btea.vo.AlgorithCountVO;
+import com.btea.vo.AlgorithVO;
+import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @Author: TwentyFiveBTea
@@ -37,4 +43,19 @@ public interface AlgorithmMapper {
      */
     @AutoFill(OperationType.UPDATE)
     void updateSubmitCount(User user);
+
+    /**
+     * 分页查询刷题记录
+     *
+     * @param algorithmDTO
+     * @return
+     */
+    Page<AlgorithVO> pageQuery(AlgorithmDTO algorithmDTO);
+
+    /**
+     * 查询成员刷题数量
+     *
+     * @return
+     */
+    List<AlgorithCountVO> selectAlgorithmCount();
 }
