@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * @Author: TwentyFiveBTea
  * @Date: 2024/12/17 13:32
- * @Description: 报名访问层接口
+ * @Description: 报名访问层
  */
 @Mapper
 public interface JoinMapper {

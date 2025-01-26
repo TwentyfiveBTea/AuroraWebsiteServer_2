@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @Author: TwentyFiveBTea
@@ -36,7 +37,10 @@ public class User implements Serializable {
     // 密码
     private String password;
 
-    // 刷题提交状态
-    private Integer submitStatus;
+    // 刷题提交次数
+    private Integer submitCount;
+
+    // 刷题提交时间
+    private LocalDateTime updateTime;
 
 }
