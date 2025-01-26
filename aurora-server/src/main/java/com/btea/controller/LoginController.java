@@ -55,7 +55,7 @@ public class LoginController {
                 .name(user.getName())
                 .token(token)
                 .build();
-
+        log.info("登陆成功，成员信息为：" + userLoginVO);
         return R.success(MessageConstant.LOGIN_SUCCESSFUL, userLoginVO);
     }
 
@@ -74,7 +74,7 @@ public class LoginController {
                 .userName(admin.getUserName())
                 .token(token)
                 .build();
-
+        log.info("登陆成功，管理员信息为：" + adminLoginVO);
         return R.success(MessageConstant.LOGIN_SUCCESSFUL, adminLoginVO);
     }
 

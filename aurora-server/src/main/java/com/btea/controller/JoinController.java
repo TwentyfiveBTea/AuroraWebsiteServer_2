@@ -33,7 +33,9 @@ public class JoinController {
     @RequestMapping(method = RequestMethod.POST, path = "/join")
     @ApiOperation("提交个人信息")
     public R join(@RequestBody @Validated JoinDTO joinDTO) {
+        log.info("收到个人信息：" + joinDTO);
         int status = joinService.insertUser(joinDTO);
+        log.info("提交个人信息中的status为：" + status);
         // 如果状态值为 0， 插入失败
         if (status == 0) {
             return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.SERVER_ERROR);
@@ -46,6 +48,7 @@ public class JoinController {
     @ApiOperation("获取页面开放状态")
     public R join() {
         String status = joinService.selectJoinStatus();
+        log.info("获取页面开放状态中的status为：" + status);
         if (status == null) {
             // 如果查询不到
             return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.SERVER_ERROR);
@@ -57,6 +60,7 @@ public class JoinController {
     @RequestMapping(method = RequestMethod.PUT, path = "/admin/join/state/manage")
     @ApiOperation("更改报名页面开放状态")
     public R JoinStatus(@RequestParam String status) {
+        log.info("状态将修改为：" + status);
         String oldStatus = joinService.selectJoinStatus();
         joinService.updateJoinStatus(status);
         if (Objects.equals(oldStatus, status)) {
@@ -70,6 +74,7 @@ public class JoinController {
     @RequestMapping(method = RequestMethod.GET, path = "/admin/join/manage")
     @ApiOperation("分页查看报名信息")
     public R<PageResult> registrationInformation(RegistrationInformationDTO registrationInformationDTO) {
+        log.info("分页要求数据为：" + registrationInformationDTO);
         PageResult pageResult = joinService.pageQuery(registrationInformationDTO);
         return R.success(pageResult);
     }

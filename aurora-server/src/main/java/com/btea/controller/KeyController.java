@@ -28,8 +28,9 @@ public class KeyController {
     @RequestMapping(method = RequestMethod.PUT, path = "/admin/key/manage/set")
     @ApiOperation("上传钥匙数量")
     public R setKeyNumber(@RequestParam int keysNumber) {
+        log.info("上传钥匙数量：" + keysNumber);
         int count = keyService.insertKey(keysNumber);
-
+        log.info("上传钥匙数量中的要是数量count为：" + count);
         if (count != 0) {
             return R.success(MessageConstant.UPDATE_SUCCESSFULLY, count);
         }
@@ -41,12 +42,14 @@ public class KeyController {
     @RequestMapping(method = RequestMethod.GET, path = "/tools/key/rent")
     @ApiOperation("查询持有钥匙")
     public R heldKeysNumber(@RequestBody UserDTO userDTO) {
+        log.info("查询用户：" + userDTO);
         return R.success(keyService.selectKeyByUserId(userDTO));
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/tools/key/rent")
     @ApiOperation("租赁归还钥匙")
     public R leaseReturnKey(@RequestParam int leasedStatus, @RequestParam String name, @RequestParam String userId) {
+        log.info("将姓名：" + name, "学号：" + userId + "的租赁钥匙状态改为：" + leasedStatus);
         UserDTO userDTO = new UserDTO();
         userDTO.setName(name);
         userDTO.setUserId(userId);

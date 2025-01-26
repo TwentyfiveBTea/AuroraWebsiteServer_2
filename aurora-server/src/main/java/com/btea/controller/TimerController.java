@@ -33,6 +33,7 @@ public class TimerController {
     @RequestMapping(method = RequestMethod.POST, path = "/tools/timer/absence")
     @ApiOperation("打卡请假")
     public R askForLeave(@RequestBody @Validated TimerAbsenceDTO timerAbsenceDTO) {
+        log.info("收到请假数据：" + timerAbsenceDTO);
         if (timerService.insertAbsence(timerAbsenceDTO) == 0) {
             return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.SERVER_ERROR);
         }
@@ -42,6 +43,7 @@ public class TimerController {
     @RequestMapping(method = RequestMethod.PUT, path = "/admin/timer/absence/manage/decide")
     @ApiOperation("打卡请假判定")
     public R leaveDecide(@RequestParam String timerAbsenceId, @RequestParam String timerAbsenceStatus) {
+        log.info("将id为：" + timerAbsenceId + "的状态改为：" + timerAbsenceStatus);
         if (timerService.updateTimerAbsenceStatus(timerAbsenceId, timerAbsenceStatus) == 0) {
             return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.SERVER_ERROR);
         }
@@ -51,6 +53,7 @@ public class TimerController {
     @RequestMapping(method = RequestMethod.GET, path = "/tools/timer/myAbsence")
     @ApiOperation("查询个人请假")
     public R selectLeaveStatus(@RequestParam String userId) {
+        log.info("查询学号为：" + userId + "的打卡请假记录");
         List<TimerAbsenceVO> timerAbsenceVOS = timerService.selectLeaveStatusByUserId(userId);
         if (timerAbsenceVOS.isEmpty()) {
             return R.success(MessageConstant.QUERY_SUCCESS);
@@ -61,6 +64,7 @@ public class TimerController {
     @RequestMapping(method = RequestMethod.GET, path = "/admin/timer/absence/manage")
     @ApiOperation("分页查询打卡请假")
     public R<PageResult> queryTimerAbsence(TimerAbsenceManagerDTO timerAbsenceManagerDTO) {
+        log.info("分页要求数据为：" + timerAbsenceManagerDTO);
         PageResult pageResult = timerService.pageQuery(timerAbsenceManagerDTO);
         return R.success(pageResult);
     }

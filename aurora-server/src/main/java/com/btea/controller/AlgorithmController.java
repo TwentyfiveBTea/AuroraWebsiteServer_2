@@ -30,6 +30,7 @@ public class AlgorithmController {
     @RequestMapping(method = RequestMethod.POST, path = "/tools/algorithm/submit")
     @ApiOperation("提交刷题记录")
     public R submitUrl(@RequestParam String userId, @RequestParam String titleUrl) {
+        log.info("学号为：" + userId, "提交的URL：" + titleUrl);
         int i = algorithmService.insertTitleUrl(userId, titleUrl);
         switch (i) {
             case 1:
@@ -49,6 +50,7 @@ public class AlgorithmController {
     @RequestMapping(method = RequestMethod.GET, path = "/tools/algorithm")
     @ApiOperation("分页查询刷题记录")
     public R<PageResult> selectAlgorithm(AlgorithmDTO algorithmDTO) {
+        log.info("分页要求数据为：" + algorithmDTO);
         PageResult pageResult = algorithmService.pageQuery(algorithmDTO);
         return R.success(pageResult);
     }
