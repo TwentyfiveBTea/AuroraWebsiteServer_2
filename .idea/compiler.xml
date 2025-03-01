@@ -10,7 +10,6 @@
         <module name="aurora-common" />
         <module name="aurora-server" />
         <module name="aurora-pojo" />
-        <module name="aurora_website_2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />
