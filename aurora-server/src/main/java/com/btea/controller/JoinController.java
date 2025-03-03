@@ -22,6 +22,7 @@ import java.util.Objects;
  * @Date: 2024/12/17 13:06
  * @Description: 报名控制层
  */
+@CrossOrigin
 @RestController
 @Slf4j
 @Api(tags = "报名接口")
@@ -56,9 +57,9 @@ public class JoinController {
         return R.success(status);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/admin/join/state/manage")
+    @RequestMapping(method = RequestMethod.POST, path = "/admin/join/state/manage")
     @ApiOperation("更改报名页面开放状态")
-    public R JoinStatus(@RequestParam String status) {
+    public R JoinStatus(@RequestBody String status) {
         log.info("状态将修改为：{}", status);
         String oldStatus = joinService.selectJoinStatus();
         joinService.updateJoinStatus(status);

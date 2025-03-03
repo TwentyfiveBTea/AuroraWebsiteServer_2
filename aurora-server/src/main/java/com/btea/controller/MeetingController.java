@@ -4,6 +4,7 @@ import com.btea.constant.MessageConstant;
 import com.btea.constant.StatusCodeConstant;
 import com.btea.dto.MeetingAbsenceDTO;
 import com.btea.dto.MeetingAbsenceManegerDTO;
+import com.btea.dto.MeetingDecideDTO;
 import com.btea.result.PageResult;
 import com.btea.result.R;
 import com.btea.service.MeetingService;
@@ -23,6 +24,7 @@ import java.util.Objects;
  * @Date: 2025/01/09 15:35
  * @Description: 会议控制层
  */
+@CrossOrigin
 @RestController
 @Slf4j
 @Api(tags = "会议接口")
@@ -40,11 +42,11 @@ public class MeetingController {
         return R.success(MessageConstant.APPLICATION_SUCCESS);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/admin/meeting/absence/manage/decide")
+    @RequestMapping(method = RequestMethod.POST, path = "/admin/meeting/absence/manage/decide")
     @ApiOperation("会议请假判定")
-    public R leaveDecide(@RequestParam String meetingAbsenceId, @RequestParam String meetingAbsenceStatus) {
-        log.info("将id为：{} 的状态改为：{}", meetingAbsenceId, meetingAbsenceStatus);
-        if (meetingService.updateMeetingAbsenceStatus(meetingAbsenceId, meetingAbsenceStatus) == 0) {
+    public R leaveDecide(@RequestBody MeetingDecideDTO meetingDecideDTO) {
+        log.info("将id为：{} 的状态改为：{}", meetingDecideDTO.getMeetingAbsenceId(), meetingDecideDTO.getMeetingAbsenceStatus());
+        if (meetingService.updateMeetingAbsenceStatus(meetingDecideDTO.getMeetingAbsenceId(), meetingDecideDTO.getMeetingAbsenceStatus()) == 0) {
             return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.SERVER_ERROR);
         }
         return R.success(MessageConstant.UPDATE_SUCCESSFULLY);

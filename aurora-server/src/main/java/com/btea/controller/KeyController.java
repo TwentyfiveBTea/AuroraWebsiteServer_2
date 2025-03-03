@@ -2,6 +2,7 @@ package com.btea.controller;
 
 import com.btea.constant.MessageConstant;
 import com.btea.constant.StatusCodeConstant;
+import com.btea.dto.KeyRentDTO;
 import com.btea.dto.UserDTO;
 import com.btea.result.R;
 import com.btea.service.KeyService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @Date: 2024/12/26 10:14
  * @Description: 钥匙控制层
  */
+@CrossOrigin
 @RestController
 @Slf4j
 @Api(tags = "钥匙接口")
@@ -25,9 +27,9 @@ public class KeyController {
     @Autowired
     private KeyService keyService;
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/admin/key/manage/set")
+    @RequestMapping(method = RequestMethod.POST, path = "/admin/key/manage/set")
     @ApiOperation("上传钥匙数量")
-    public R setKeyNumber(@RequestParam int keysNumber) {
+    public R setKeyNumber(@RequestBody int keysNumber) {
         log.info("上传钥匙数量：{}", keysNumber);
         int count = keyService.insertKey(keysNumber);
         log.info("上传钥匙数量中的要是数量count为：{}", count);
@@ -41,29 +43,32 @@ public class KeyController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/tools/key/rent")
     @ApiOperation("查询持有钥匙")
-    public R heldKeysNumber(@RequestBody UserDTO userDTO) {
-        log.info("查询用户：{}", userDTO);
-        return R.success(keyService.selectKeyByUserId(userDTO));
-    }
-
-    @RequestMapping(method = RequestMethod.PUT, path = "/tools/key/rent")
-    @ApiOperation("租赁归还钥匙")
-    public R leaseReturnKey(@RequestParam int leasedStatus, @RequestParam String name, @RequestParam String userId) {
-        log.info("将姓名：{} 学号：{} 的租赁钥匙状态改为：{}", name, userId, leasedStatus);
+    public R heldKeysNumber(@RequestParam String name, @RequestParam String userId) {
+        log.info("查询用户：{} 学号为：{} ", name, userId);
         UserDTO userDTO = new UserDTO();
         userDTO.setName(name);
         userDTO.setUserId(userId);
+        return R.success(keyService.selectKeyByUserId(userDTO));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/tools/key/rent")
+    @ApiOperation("租赁归还钥匙")
+    public R leaseReturnKey(@RequestBody KeyRentDTO keyRentDTO) {
+        log.info("将姓名：{} 学号：{} 的租赁钥匙状态改为：{}", keyRentDTO.getName(), keyRentDTO.getUserId(), keyRentDTO.getLeasedStatus());
+        UserDTO userDTO = new UserDTO();
+        userDTO.setName(keyRentDTO.getName());
+        userDTO.setUserId(keyRentDTO.getUserId());
 
         MemberKeyVO memberKeyVO = keyService.selectKeyByUserId(userDTO);
         // 未租赁钥匙 -- 允许租赁
         if (memberKeyVO.getId() == null) {
             // 如果是租赁钥匙
-            if (leasedStatus == -1) {
+            if (keyRentDTO.getLeasedStatus() == -1) {
                 // 先查找是否有未被租赁的钥匙
                 String keyId = keyService.selectNotLeasedKey();
 
                 if (keyId != null) {
-                    int i = keyService.updateKeyStatusLease(keyId, leasedStatus, name, userId);
+                    int i = keyService.updateKeyStatusLease(keyId, keyRentDTO.getLeasedStatus(), keyRentDTO.getName(), keyRentDTO.getUserId());
 
                     if (i == 0) {
                         return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.SERVER_ERROR);
@@ -75,18 +80,18 @@ public class KeyController {
                 return R.success(MessageConstant.NO_REMAINING_KEYS);
             }
 
-            if (leasedStatus == 1) {
+            if (keyRentDTO.getLeasedStatus() == 1) {
                 return R.success(MessageConstant.UNLEASED_KEYS);
             }
         }
 
         // 若已经有钥匙
-        if (leasedStatus == -1) {
+        if (keyRentDTO.getLeasedStatus() == -1) {
             return R.success(MessageConstant.LEASED_KEYS);
         }
 
         // 归还钥匙
-        int i = keyService.updateKeyStatusReturn(keyService.selectKeyByUserId(userDTO).getId(), leasedStatus);
+        int i = keyService.updateKeyStatusReturn(keyService.selectKeyByUserId(userDTO).getId(), keyRentDTO.getLeasedStatus());
         if (i != 1) {
             return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.SERVER_ERROR);
         }

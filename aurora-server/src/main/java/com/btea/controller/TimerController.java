@@ -4,6 +4,7 @@ import com.btea.constant.MessageConstant;
 import com.btea.constant.StatusCodeConstant;
 import com.btea.dto.TimerAbsenceDTO;
 import com.btea.dto.TimerAbsenceManagerDTO;
+import com.btea.dto.TimerDecideDTO;
 import com.btea.result.PageResult;
 import com.btea.result.R;
 import com.btea.service.TimerService;
@@ -23,6 +24,7 @@ import java.util.Objects;
  * @Date: 2025/01/07 16:35
  * @Description: 打卡控制层
  */
+@CrossOrigin
 @RestController
 @Slf4j
 @Api(tags = "打卡接口")
@@ -40,11 +42,11 @@ public class TimerController {
         return R.success(MessageConstant.APPLICATION_SUCCESS);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/admin/timer/absence/manage/decide")
+    @RequestMapping(method = RequestMethod.POST, path = "/admin/timer/absence/manage/decide")
     @ApiOperation("打卡请假判定")
-    public R leaveDecide(@RequestParam String timerAbsenceId, @RequestParam String timerAbsenceStatus) {
-        log.info("将id为：{} 的状态改为：{}", timerAbsenceId, timerAbsenceStatus);
-        if (timerService.updateTimerAbsenceStatus(timerAbsenceId, timerAbsenceStatus) == 0) {
+    public R leaveDecide(@RequestBody TimerDecideDTO timerDecideDTO) {
+        log.info("将id为：{} 的状态改为：{}", timerDecideDTO.getTimerAbsenceId(), timerDecideDTO.getTimerAbsenceStatus());
+        if (timerService.updateTimerAbsenceStatus(timerDecideDTO.getTimerAbsenceId(), timerDecideDTO.getTimerAbsenceStatus()) == 0) {
             return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.SERVER_ERROR);
         }
         return R.success(MessageConstant.UPDATE_SUCCESSFULLY);

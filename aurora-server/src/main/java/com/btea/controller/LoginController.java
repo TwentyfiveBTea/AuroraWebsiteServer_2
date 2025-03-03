@@ -26,6 +26,7 @@ import java.util.Map;
  * @Date: 2024/11/28 20:48
  * @Description: 登录控制层
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/login")
 @Slf4j

@@ -3,6 +3,7 @@ package com.btea.controller;
 import com.btea.constant.MessageConstant;
 import com.btea.constant.StatusCodeConstant;
 import com.btea.dto.AlgorithmDTO;
+import com.btea.dto.AlgorithmSetDTO;
 import com.btea.result.PageResult;
 import com.btea.result.R;
 import com.btea.service.AlgorithmService;
@@ -20,6 +21,7 @@ import java.util.List;
  * @Date: 2025/01/10 11:53
  * @Description: 算法控制层
  */
+@CrossOrigin
 @RestController
 @Slf4j
 @Api(tags = "算法接口")
@@ -29,9 +31,9 @@ public class AlgorithmController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/tools/algorithm/submit")
     @ApiOperation("提交刷题记录")
-    public R submitUrl(@RequestParam String userId, @RequestParam String titleUrl) {
-        log.info("学号为：{} 提交的URL：{}", userId, titleUrl);
-        int i = algorithmService.insertTitleUrl(userId, titleUrl);
+    public R submitUrl(@RequestBody AlgorithmSetDTO algorithmSetDTO) {
+        log.info("学号为：{} 提交的URL：{}", algorithmSetDTO.getUserId(), algorithmSetDTO.getTitleUrl());
+        int i = algorithmService.insertTitleUrl(algorithmSetDTO.getUserId(), algorithmSetDTO.getTitleUrl());
         switch (i) {
             case 1:
                 return R.success(MessageConstant.SUBMIT_SUCCESS);
