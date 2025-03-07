@@ -22,7 +22,7 @@
     </select>
 
     <select id="pageQuery" resultType="com.btea.vo.MeetingAbsenceVO">
-        select id,name, meeting_absence_time, meeting_absence_reason, meeting_absence_status from meeting_absence
+        select id, name, meeting_absence_time, meeting_absence_reason, meeting_absence_status from meeting_absence
         <where>
             <if test="name != null">
                 and name like concat('%',#{name},'%')

@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AlgorithVO {
     // 题目链接
-    String titleUrl;
+    private String titleUrl;
     // 创建时间
-    String createTime;
+    private String createTime;
 }

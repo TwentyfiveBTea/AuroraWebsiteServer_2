@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class TimerAbsenceVO {
     // 请假 id
-    String id;
+    private String id;
     // 请假时间
-    String timerAbsenceTime;
+    private String timerAbsenceTime;
     // 请假理由
-    String timerAbsenceReason;
+    private String timerAbsenceReason;
     // 请假状态
-    Integer timerAbsenceStatus;
+    private Integer timerAbsenceStatus;
 }

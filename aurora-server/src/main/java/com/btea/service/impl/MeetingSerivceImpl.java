@@ -75,6 +75,7 @@ public class MeetingSerivceImpl implements MeetingService {
         List<MeetingAbsenceVO> meetingAbsenceVOS = meetingAbsences.stream()
                 .map(meetingAbsence -> new MeetingAbsenceVO().builder()
                         .id(meetingAbsence.getId())
+                        .name(meetingAbsence.getName())
                         .meetingAbsenceTime(meetingAbsence.getMeetingAbsenceTime())
                         .meetingAbsenceReason(meetingAbsence.getMeetingAbsenceReason())
                         .meetingAbsenceStatus(meetingAbsence.getMeetingAbsenceStatus())

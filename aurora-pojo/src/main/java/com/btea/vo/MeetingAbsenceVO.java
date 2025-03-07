@@ -16,11 +16,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class MeetingAbsenceVO {
     // 请假 id
-    String id;
+    private String id;
+    // 姓名
+    private String name;
     // 请假时间
-    String meetingAbsenceTime;
+    private String meetingAbsenceTime;
     // 请假理由
-    String meetingAbsenceReason;
+    private String meetingAbsenceReason;
     // 请假状态
-    Integer meetingAbsenceStatus;
+    private Integer meetingAbsenceStatus;
 }

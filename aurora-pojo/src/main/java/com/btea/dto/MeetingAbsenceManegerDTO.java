@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class MeetingAbsenceManegerDTO {
     // 姓名
-    String name;
+    private String name;
     // 当前页数
     private int page;
     // 每页的大小

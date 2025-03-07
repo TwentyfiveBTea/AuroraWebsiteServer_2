@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class AlgorithCountVO {
     // 姓名
-    String name;
+    private String name;
     // 学号
-    String userId;
+    private String userId;
     // 刷题数量
-    String submitCount;
+    private String submitCount;
     // 最近一次提交时间
-    String updateTime;
+    private String updateTime;
 }

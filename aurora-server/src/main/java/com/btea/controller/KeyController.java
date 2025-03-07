@@ -43,7 +43,7 @@ public class KeyController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/tools/key/rent")
     @ApiOperation("查询持有钥匙")
-    public R heldKeysNumber(@RequestParam String name, @RequestParam String userId) {
+    public R heldKeysNumber(String name, String userId) {
         log.info("查询用户：{} 学号为：{} ", name, userId);
         UserDTO userDTO = new UserDTO();
         userDTO.setName(name);

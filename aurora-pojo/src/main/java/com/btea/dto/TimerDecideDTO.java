@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Data
 public class TimerDecideDTO {
     // 打卡理由 ID
-    String timerAbsenceId;
+    private String timerAbsenceId;
 
     // 打卡理由状态
-    String timerAbsenceStatus;
+    private String timerAbsenceStatus;
 }

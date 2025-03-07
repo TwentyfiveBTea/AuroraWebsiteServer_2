@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class KeysLeaseStatusVO {
     // 钥匙 id
-    String id;
+    private String id;
     // 姓名
-    String name;
+    private String name;
     // 租界时间
-    String leasedTime;
+    private String leasedTime;
     // 已租借天数
-    String leasedDays;
+    private String leasedDays;
 }

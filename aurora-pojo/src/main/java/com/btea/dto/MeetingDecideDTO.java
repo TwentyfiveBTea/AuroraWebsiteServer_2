@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Data
 public class MeetingDecideDTO {
     // 会议理由 ID
-    String meetingAbsenceId;
+    private String meetingAbsenceId;
 
     // 会议理由状态
-    String meetingAbsenceStatus;
+    private String meetingAbsenceStatus;
 }
