@@ -3,6 +3,7 @@ package com.btea.controller;
 import com.btea.constant.MessageConstant;
 import com.btea.constant.StatusCodeConstant;
 import com.btea.dto.KeyRentDTO;
+import com.btea.dto.KeysNumberDTO;
 import com.btea.dto.UserDTO;
 import com.btea.result.R;
 import com.btea.service.KeyService;
@@ -29,9 +30,9 @@ public class KeyController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/admin/key/manage/set")
     @ApiOperation("上传钥匙数量")
-    public R setKeyNumber(@RequestBody int keysNumber) {
-        log.info("上传钥匙数量：{}", keysNumber);
-        int count = keyService.insertKey(keysNumber);
+    public R setKeyNumber(@RequestBody KeysNumberDTO keysNumberDTO) {
+        log.info("上传钥匙数量：{}", keysNumberDTO.getKeysNumber());
+        int count = keyService.insertKey(keysNumberDTO.getKeysNumber());
         log.info("上传钥匙数量中的要是数量count为：{}", count);
         if (count != 0) {
             return R.success(MessageConstant.UPDATE_SUCCESSFULLY, count);
