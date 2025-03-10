@@ -47,7 +47,7 @@
     <select id="selectIsLeasedKeys" resultType="int">
         select count(*) as isLeasedKeysNumber
         from `key`
-        where user_id is not null
+        where leased_status = -1
     </select>
 
     <select id="selectKeysStatus" resultType="com.btea.entity.Key">
