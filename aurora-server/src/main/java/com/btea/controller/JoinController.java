@@ -3,6 +3,7 @@ package com.btea.controller;
 import com.btea.constant.MessageConstant;
 import com.btea.constant.StatusCodeConstant;
 import com.btea.dto.JoinDTO;
+import com.btea.dto.JoinStatusDTO;
 import com.btea.dto.RegistrationInformationDTO;
 import com.btea.result.PageResult;
 import com.btea.result.R;
@@ -59,16 +60,18 @@ public class JoinController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/admin/join/state/manage")
     @ApiOperation("更改报名页面开放状态")
-    public R JoinStatus(@RequestBody String status) {
-        log.info("状态将修改为：{}", status);
+    public R JoinStatus(@RequestBody JoinStatusDTO joinStatusDTO) {
+        String status = joinStatusDTO.getStatus();
         String oldStatus = joinService.selectJoinStatus();
+        log.info("原状态为：{}", oldStatus);
+        log.info("状态将修改为：{}", status);
         joinService.updateJoinStatus(status);
         if (Objects.equals(oldStatus, status)) {
             // 如果前后状态一致 -- 更新失败
             return R.error(StatusCodeConstant.SERVER_ERROR, MessageConstant.UPDATE_STATUS_FAILED);
         }
 
-        return R.success(joinService.selectJoinStatus(), MessageConstant.UPDATE_STATUS_SUCCESSFULLY);
+        return R.success(MessageConstant.UPDATE_STATUS_SUCCESSFULLY, joinService.selectJoinStatus());
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/admin/join/manage")

@@ -10,8 +10,8 @@ spring:
 aurora:
   jwt:
     user-secret-key: userIdCast
-    # 2h
-    user-ttl: 7200000
+    # 12h
+    user-ttl: 43200000
     user-token-name: userToken
 
     admin-secret-key: adminIdCast
